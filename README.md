@@ -15,6 +15,8 @@ Zowiki provides a robust structure for a machine-readable knowledge base:
 
 ## ✨ Features
 
+- **Obsidian-flavored Markdown (OFM)**: Standardized on wikilinks (`[[link]]`)
+  and callouts for maximum connectivity.
 - **Semantic Web Integrity**: Standardized JSON-LD in YAML frontmatter.
 - **Agent-Ready**: Explicit protocols for AI-driven ingestion and maintenance.
 - **Forkable & Syncable**: Built-in GitHub Action to stay up-to-date with

@@ -18,13 +18,12 @@ maintaining the second brain vault.
 - **Log**: Append entry to `wiki/log.md`.
 - **Constraint**: Do not modify files in `raw/`.
 
-### 2. Semantic Metadata
+### 2. Semantic Metadata & Formatting
 
-All files in `wiki/` must follow **JSON-LD** principles in YAML frontmatter.
+All files in `wiki/` must follow **Obsidian-flavored Markdown (OFM)**:
 
-- `id`: Unique identifier (e.g., `wiki:person-name`).
-- `type`: Schema.org type (e.g., `Person`, `Project`).
-- `name`: Human-readable name.
+- **Wikilinks**: Use `[[note]]` for all internal links.
+- **Frontmatter**: Use JSON-LD-inspired YAML (e.g., `id`, `type`, `name`).
 
 ### 3. Navigation
 
