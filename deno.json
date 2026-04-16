@@ -1,0 +1,11 @@
+{
+  "fmt": {
+    "files": {
+      "include": ["wiki/", "raw/", "skills/", "SCHEMA.md"]
+    },
+    "options": {
+      "lineWidth": 80,
+      "proseWrap": "always"
+    }
+  }
+}
