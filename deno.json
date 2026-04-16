@@ -1,0 +1,10 @@
+{
+  "tasks": {
+    "lint": "deno run --allow-read --allow-write skills/lint.ts",
+    "heartbeat": "deno run --allow-read --allow-write skills/book/heartbeat.ts",
+    "fmt": "deno fmt"
+  },
+  "fmt": {
+    "include": ["wiki/", "raw/", "skills/", "SCHEMA.md", ".agents/"]
+  }
+}
