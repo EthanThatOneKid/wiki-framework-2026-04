@@ -1,0 +1,19 @@
+[project]
+name = "book"
+version = "0.1.0"
+description = "Living knowledge base with SHACL validation"
+requires-python = ">=3.12"
+dependencies = [
+    "rdflib",
+    "pyshacl",
+    "pyyaml",
+]
+
+[project.scripts]
+book-tool = "src.cli.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[dependency-groups]
+dev = []

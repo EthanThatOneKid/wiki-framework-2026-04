@@ -1,0 +1,32 @@
+name: SHACL Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run SHACL validation
+        run: uv run python -m src shacl validate
+
+      - name: Upload validation report
+        if: failure()
+        run: |
+          echo "## SHACL Validation Failed" >> $GITHUB_STEP_SUMMARY
+          echo "Run \`uv run python -m src shacl validate\` for details." >> $GITHUB_STEP_SUMMARY
