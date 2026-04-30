@@ -23,10 +23,10 @@ jobs:
         run: uv sync
 
       - name: Run SHACL validation
-        run: uv run python -m src shacl validate
+        run: uv run python -m wiki shacl validate
 
       - name: Upload validation report
         if: failure()
         run: |
           echo "## SHACL Validation Failed" >> $GITHUB_STEP_SUMMARY
-          echo "Run \`uv run python -m src shacl validate\` for details." >> $GITHUB_STEP_SUMMARY
+          echo "Run \`uv run python -m wiki shacl validate\` for details." >> $GITHUB_STEP_SUMMARY
