@@ -182,7 +182,7 @@ def _run_frontmatter(args: argparse.Namespace, book_root: Path) -> int:
 def _run_init(args: argparse.Namespace) -> int:
     """Initialize a new wiki from a template."""
     # Handle --list-templates
-    if args.list_templates:
+    if hasattr(args, 'list_templates') and args.list_templates:
         template_root = Path(__file__).resolve().parent / "templates"
         if not template_root.is_dir():
             print("No templates directory found.", file=sys.stderr)
