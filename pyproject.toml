@@ -22,11 +22,7 @@ classifiers = [
     "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
     "Topic :: Software Development :: Documentation",
 ]
-urls = {
-    "Homepage" = "https://github.com/EthanThatOneKid/wiki",
-    "Repository" = "https://github.com/EthanThatOneKid/wiki",
-    "Issues" = "https://github.com/EthanThatOneKid/wiki/issues",
-}
+urls = {Homepage = "https://github.com/EthanThatOneKid/wiki", Repository = "https://github.com/EthanThatOneKid/wiki", Issues = "https://github.com/EthanThatOneKid/wiki/issues"}
 readme = "README.md"
 dependencies = [
     "rdflib",
@@ -45,4 +41,7 @@ packages = ["wiki"]
 "wiki/templates" = "wiki/templates"
 
 [dependency-groups]
-dev = []
+dev = [
+    "pytest",
+    "pytest-cov",
+]
