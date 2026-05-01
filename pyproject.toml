@@ -7,6 +7,27 @@ name = "wiki-framework"
 version = "0.1.0"
 description = "An opinionated, engine-agnostic wiki framework with SHACL validation"
 requires-python = ">=3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "EthanThatOneKid"},
+]
+keywords = ["wiki", "shacl", "rdf", "sparql", "semantic-web", "knowledge-base"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Documentation",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Software Development :: Documentation",
+]
+urls = {
+    "Homepage" = "https://github.com/EthanThatOneKid/wiki",
+    "Repository" = "https://github.com/EthanThatOneKid/wiki",
+    "Issues" = "https://github.com/EthanThatOneKid/wiki/issues",
+}
+readme = "README.md"
 dependencies = [
     "rdflib",
     "pyshacl",
