@@ -44,4 +44,18 @@ packages = ["wiki"]
 dev = [
     "pytest",
     "pytest-cov",
+    "ruff",
+    "mypy",
 ]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
