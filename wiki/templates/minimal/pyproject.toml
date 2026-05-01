@@ -1,0 +1,7 @@
+name: "my-wiki"
+version: "0.1.0"
+description: "A minimal wiki instance"
+requires-python: ">=3.12"
+dependencies = [
+    "wiki-framework>=0.1.0",
+]

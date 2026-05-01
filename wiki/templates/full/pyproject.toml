@@ -1,0 +1,11 @@
+[project]
+name = "my-wiki"
+version = "0.1.0"
+description = "A wiki built with wiki-framework"
+requires-python = ">=3.12"
+dependencies = [
+    "wiki-framework>=0.1.0",
+]
+
+[dependency-groups]
+dev = []

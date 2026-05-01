@@ -1,0 +1,77 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix schema: <https://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+schema:PersonShape
+    a sh:NodeShape ;
+    sh:targetClass schema:Person ;
+    sh:property [
+        sh:path schema:givenName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:familyName ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:jobTitle ;
+        sh:minCount 0 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:worksFor ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:url ;
+        sh:minCount 0 ;
+        sh:datatype xsd:anyURI ;
+    ] ;
+    sh:property [
+        sh:path schema:sameAs ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path foaf:account ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:knows ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:colleague ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:family ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:status ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:context ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+    ] ;
+    sh:property [
+        sh:path schema:keywords ;
+        sh:minCount 0 ;
+    ] ;
+    sh:property [
+        sh:path schema:dateCreated ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+    ] .

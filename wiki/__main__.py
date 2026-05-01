@@ -70,6 +70,10 @@ def _add_init(subparsers: argparse._SubParsersAction) -> None:
     p = subparsers.add_parser("init", help="initialize a new wiki from a template")
     p.add_argument("-t", "--template", default="default", help="template to use (default: default)")
     p.add_argument("-d", "--dir", default=".", help="target directory (default: current directory)")
+    p.add_argument(
+        "--list-templates", action="store_true",
+        help="list available templates",
+    )
 
 
 def _run_sparql(args: argparse.Namespace, book_root: Path) -> int:
@@ -176,33 +180,50 @@ def _run_frontmatter(args: argparse.Namespace, book_root: Path) -> int:
 
 
 def _run_init(args: argparse.Namespace) -> int:
-    template_id = args.template
+    """Initialize a new wiki from a template."""
+    # Handle --list-templates
+    if args.list_templates:
+        template_root = Path(__file__).resolve().parent / "templates"
+        if not template_root.is_dir():
+            print("No templates directory found.", file=sys.stderr)
+            return 1
+        
+        templates = [d.name for d in template_root.iterdir() if d.is_dir()]
+        if not templates:
+            print("No templates available.", file=sys.stderr)
+            return 1
+        
+        print("Available templates:")
+        for t in sorted(templates):
+            print(f"  - {t}")
+        return 0
+    
     target_dir = Path(args.dir).resolve()
-
-    # Locate template directory
-    template_root = Path(__file__).resolve().parent / "templates"
-    template_path = template_root / template_id
-
-    if not template_path.is_dir():
-        print(f"Error: Template '{template_id}' not found in {template_root}", file=sys.stderr)
-        return 1
-
-    # Copy template to target directory
+    
+    # Check if target directory is not empty
     if target_dir.exists() and any(target_dir.iterdir()):
         print(f"Error: Target directory '{target_dir}' is not empty", file=sys.stderr)
         return 1
-
+    
+    template_id = args.template
+    template_path = Path(__file__).resolve().parent / "templates" / template_id
+    
+    if not template_path.is_dir():
+        print(f"Error: Template '{template_id}' not found in {Path(__file__).resolve().parent / 'templates'}", file=sys.stderr)
+        return 1
+    
+    # Copy template to target directory
     target_dir.mkdir(parents=True, exist_ok=True)
-
+    
     for item in template_path.iterdir():
         dest = target_dir / item.name
         if item.is_dir():
             shutil.copytree(item, dest)
         else:
             shutil.copy2(item, dest)
-
+    
     print(f"Initialized wiki in {target_dir} using '{template_id}' template")
-
+    
     # Initialize git repository
     try:
         subprocess.run(["git", "init"], cwd=target_dir, check=True, capture_output=True)
@@ -211,11 +232,11 @@ def _run_init(args: argparse.Namespace) -> int:
             ["git", "commit", "-m", "Initial commit from wiki-framework template"],
             cwd=target_dir, check=True, capture_output=True
         )
-        print("Initialized git repository with initial commit")
+        print(f"Initialized git repository with initial commit")
     except subprocess.CalledProcessError as e:
         print(f"Warning: Failed to initialize git repo: {e}", file=sys.stderr)
         return 0  # Not a fatal error
-
+    
     return 0
 
 
