@@ -9,7 +9,6 @@ def test_load_shapes(tmp_path):
     shapes_dir = tmp_path / "shapes"
     shapes_dir.mkdir()
     
-    # Create a simple shape file
     shape_file = shapes_dir / "test.ttl"
     shape_content = """@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <https://schema.org/> .
@@ -50,12 +49,12 @@ def test_validate_all_no_shapes(tmp_path, capsys):
     wiki_dir = tmp_path / "wiki"
     wiki_dir.mkdir()
     
-    # Create a dummy markdown file
     md_file = wiki_dir / "test.md"
     md_content = """---
-"@type": Thing
-name: Test
+{"@type": "Thing", "name": "Test"}
 ---
+
+# Test
 """
     md_file.write_text(md_content)
     
@@ -74,7 +73,6 @@ def test_validate_file_valid(tmp_path):
     shapes_dir = tmp_path / "shapes"
     shapes_dir.mkdir()
     
-    # Create shape
     shape_file = shapes_dir / "thing.ttl"
     shape_content = """@prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix schema: <https://schema.org/> .
@@ -91,13 +89,11 @@ schema:ThingShape a sh:NodeShape ;
 """
     shape_file.write_text(shape_content)
     
-    # Create valid file
     wiki_dir = tmp_path / "wiki"
     wiki_dir.mkdir()
     md_file = wiki_dir / "test.md"
     md_content = """---
-"@type": Thing
-name: "Test Page"
+{"@type": "Thing", "name": "Test Page"}
 ---
 
 # Test Page

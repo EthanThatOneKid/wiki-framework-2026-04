@@ -21,16 +21,14 @@ def test_load_graph(tmp_path):
     wiki_dir = tmp_path / "wiki"
     wiki_dir.mkdir()
     
-    # Create a file with frontmatter
     md_file = wiki_dir / "test.md"
-    content = """---
-"@type": Thing
-name: Test
+    md_content = """---
+{"@type": "Thing", "name": "Test"}
 ---
 
 # Test
 """
-    md_file.write_text(content)
+    md_file.write_text(md_content)
     
     graph = load_graph(wiki_dir=wiki_dir)
     stats = graph_stats(graph)
