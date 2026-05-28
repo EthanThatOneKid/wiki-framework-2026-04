@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import argparse
-from wiki.__main__ import _run_init
+from wiki.__main__ import _find_wiki_root, _run_init
 
 
 def test_init_default_template(tmp_path, capsys):
@@ -64,3 +64,15 @@ def test_init_list_templates(capsys):
     assert result == 0
     captured = capsys.readouterr()
     assert "Available templates:" in captured.out
+
+
+def test_find_wiki_root_uses_current_working_directory(tmp_path, monkeypatch):
+    """Test that installed CLI commands resolve the active wiki checkout."""
+    wiki_root = tmp_path / "my-wiki"
+    nested = wiki_root / "wiki" / "nested"
+    nested.mkdir(parents=True)
+    (wiki_root / "pyproject.toml").write_text("[project]\nname = \"my-wiki\"\n")
+
+    monkeypatch.chdir(nested)
+
+    assert _find_wiki_root() == wiki_root

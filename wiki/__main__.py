@@ -241,13 +241,13 @@ def _run_init(args: argparse.Namespace) -> int:
 
 
 def _find_wiki_root() -> Path:
-    """Walk up from __file__ until we find a directory containing pyproject.toml."""
-    current = Path(__file__).resolve().parent
+    """Walk up from the current directory until we find a wiki root."""
+    current = Path.cwd().resolve()
     while current != current.parent:
-        if (current / "pyproject.toml").exists() or (current / "wiki").exists():
+        if (current / "pyproject.toml").exists() and (current / "wiki").is_dir():
             return current
         current = current.parent
-    raise RuntimeError(f"Could not locate wiki root from {__file__}")
+    raise RuntimeError(f"Could not locate wiki root from {Path.cwd()}")
 
 
 def main() -> int:
@@ -282,4 +282,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-
